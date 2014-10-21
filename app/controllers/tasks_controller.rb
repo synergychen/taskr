@@ -1,6 +1,8 @@
 class TasksController < ApplicationController
+  before_action :require_login
+
   def index
-    @tasks = current_user.tasks.all
+    @incomplete_tasks = current_user.tasks.incomplete
     @task = current_user.tasks.new
   end
 
@@ -9,7 +11,7 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to :back
     else
-      @tasks = current_user.tasks.all
+      @incomplete_tasks = current_user.tasks.incomplete
       render :index
     end
   end
