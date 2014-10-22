@@ -3,16 +3,19 @@ class TasksController < ApplicationController
 
   def index
     @incomplete_tasks = current_user.tasks.incomplete
+    @complete_tasks = current_user.tasks.complete
     @task = current_user.tasks.new
   end
 
   def create
     @task = current_user.tasks.new(task_params)
+
     if @task.save
       render @task
     else
-      @incomplete_tasks = current_user.tasks.incomplete
-      render :index
+      render partial: "error_messages",
+        locals: { target: @task },
+        status: 422
     end
   end
 

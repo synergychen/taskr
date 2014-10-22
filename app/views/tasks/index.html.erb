@@ -1,9 +1,15 @@
 <h3>Viewing tasks</h3>
 
+<div id="errors"></div>
+
 <%= render "form", task: @task %>
 
 <h3>Incompleted tasks</h3>
-
-<ul>
+<ul id="incomplete-tasks-list">
   <%= render @incomplete_tasks %>
+</ul>
+
+<h3>Completed tasks</h3>
+<ul id="complete-tasks-list">
+  <%= render @complete_tasks %>
 </ul>

@@ -7,4 +7,8 @@ class Task < ActiveRecord::Base
   def self.incomplete
     where(completion: false)
   end
+
+  def self.complete
+    where(completion: true)
+  end
 end
