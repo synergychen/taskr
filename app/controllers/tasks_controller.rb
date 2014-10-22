@@ -2,8 +2,8 @@ class TasksController < ApplicationController
   before_action :require_login
 
   def index
-    @incomplete_tasks = current_user.tasks.incomplete
-    @complete_tasks = current_user.tasks.complete
+    @incomplete_tasks = current_user.tasks.incomplete.order("created_at DESC")
+    @complete_tasks = current_user.tasks.complete.order("created_at DESC")
     @task = current_user.tasks.new
   end
 

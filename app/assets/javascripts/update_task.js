@@ -1,5 +1,5 @@
 $(function() {
-  $("ul").on("submit", "form.edit_task", updateTaskFromServer);
+  $("body").on("submit", "form.edit_task", updateTaskFromServer);
 });
 
 var updateTaskFromServer = function() {
@@ -9,17 +9,34 @@ var updateTaskFromServer = function() {
       type: "POST",
       data: taskData
   });
+
   $(this).parent("li").fadeOut("fast");
-  conversation.done(updateTaskDataFromList);
+
+  var changeToCompletion = $(this).find('input[name="task[completion]"]').val();
+  if ( changeToCompletion === "1" ) {
+    conversation.done(addToComplete);
+  } else {
+    conversation.done(addToIncomplete);
+  }
+
   conversation.fail(onFailure);
   return false;
 };
 
-var updateTaskDataFromList = function(html) {
-  var completeTaskList = $("ul#complete-tasks-list");
-  completeTaskList.prepend(html);
+var addToIncomplete = function(html) {
+  console.log("unchecked");
+  var incompleteTaskList = $("ul#incomplete-tasks-list");
+  var element = $(html).hide();
+  incompleteTaskList.prepend(html);
+  element.fadeIn();
+};
 
-  console.log("UPDATED!");
+var addToComplete = function(html) {
+  console.log("checked");
+  var completeTaskList = $("ul#complete-tasks-list");
+  var element = $(html).hide();
+  completeTaskList.prepend(html);
+  element.fadeIn();
 };
 
 var onFailure = function(ajaxObject) {

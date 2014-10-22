@@ -1,5 +1,5 @@
 $(function() {
-  $("ul").on("submit", "form.button_to", deleteTaskFromServer);
+  $("body").on("submit", "form.button_to", deleteTaskFromServer);
 });
 
 var deleteTaskFromServer = function() {
