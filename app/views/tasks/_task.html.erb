@@ -4,4 +4,8 @@
   <%= form.hidden_field :completion, value: 1 %>
   <%= form.submit %>
 <% end %>
+<%= form_for task, method: :delete do |form| %>
+  <%= form.hidden_field :completion, value: 0 %>
+  <%= form.submit "Delete task" %>
+<% end %>
 </li>
