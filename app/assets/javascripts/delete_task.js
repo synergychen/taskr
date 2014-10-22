@@ -9,15 +9,10 @@ var deleteTaskFromServer = function() {
     type: "DELETE",
     data: taskData
   });
-  conversation.done(deleteTaskDataFromList);
+  $(this).parent("li").fadeOut();
   conversation.fail(onFailure);
   console.log("DELETED!");
   return false;
-};
-
-var deleteTaskDataFromList = function(data) {
-  var taskId = data.taskId;
-  $("#task_" + taskId).fadeOut();
 };
 
 var onFailure = function(ajaxObject) {

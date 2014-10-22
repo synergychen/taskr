@@ -28,7 +28,7 @@ class TasksController < ApplicationController
   def destroy
     task = current_user.tasks.find(params[:id])
     task.destroy
-    render json: { taskId: params[:id] }
+    render nothing: true
   end
 
   private
